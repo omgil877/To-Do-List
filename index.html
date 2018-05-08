@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>To-Do List</title>
+</head>
+<body>
+	
+	<h1>To-Do List</h1>
+
+	<form>
+		<input type="text">
+		<input type="submit" value="save">
+	</form>
+
+	<div id="todo-list"></div>
+
+	<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+
+  	<script type="text/javascript">
+  		
+  		var list = JSON.parse(localStorage.getItem("todolist"));
+
+  		// checks to see if todolist exists om localStorage amd is an array currently
+  		// IF no, set a local list variable to an empty array
+  		//otherwise list is our current list of todos
+
+  		if(!Array.isArray(list)) {
+  			list = [];
+  		}
+
+
+
+  		function putOnPage() {
+
+  			$("#todo-list").empty(); // empties out the html
+
+  			var insideList = JSON.parse(localStorage.getItem("todolist"));
+
+  			// Checks to see if we have any tools in localStorage 
+  			//If we do, set the local insideList variable to our todos
+  			//otherwise set the local insideList variable to an empty array  
+  			if(!Array.isArray(insideList)) {
+  			insideList = [];
+  			}
+
+
+
+			// render(provide) our insideList todos to the page
+  		for (var i = 0; i < insideList.length; i++) {
+  			var p = $("<p>").text(insideList[i]);
+  			var b = $("<button class='delete'>").text("x").attr("data-index", i);
+  			p.prepend(b)
+  			$("#todo-list").prepend(p);
+
+  			}
+
+  		}
+
+  		// render our todos on page load
+  		putOnPage(); 
+
+  		$(document).on("click", "button.delete", function() {
+  			var todolist = JSON.parse(localStorage.getItem("todolist"));
+  			var currentIndex = $(this).attr("data-index");
+
+  			//deletes the items marked for deletion
+  			todolist.splice(currentIndex, 1);
+  			list = todolistl;
+
+  			localStorage.setItem("todolist", JSON.stringify(todolist));  
+  		});
+
+  		$("input[type='submit']").on("click", function(event) {
+  			event.preventDefault();
+
+  			// Setting the input va;ue to a variable and then clearing the input
+  			var val = $("input[type='text']").val();
+  			$("input[type='text']").val("");
+
+  			//adding our new todo to our local lsit variable and adding it local storage
+  			list.push(val);
+  			localStorage.setItem("todolist", JSON.stringify(list));
+
+  			putOnPage();
+  		})
+
+
+
+
+
+
+  		
+
+  	</script>
+
+</body>
+</html>
