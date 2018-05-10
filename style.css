@@ -1,0 +1,33 @@
+
+
+header, footer {
+    padding: 1em;
+    color: white;
+    background-color: black;
+    clear: left;
+    text-align: center;
+}
+
+article, img {
+	float: left;
+    max-width: 160px;
+    margin: 0;
+    padding: 1em;
+    height: 100%;
+
+}
+
+#p1 {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+    height: 100%;
+    background-color: #97a0af;
+}
+
+html, body {
+	        height: 100%;
+            margin: 0;
+        }
+
